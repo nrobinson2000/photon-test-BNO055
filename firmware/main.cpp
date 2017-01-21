@@ -14,15 +14,9 @@
 SYSTEM_MODE(MANUAL);
 SYSTEM_THREAD(ENABLED);
 
-#define HTTP_PORT 80
-
-MDNS mdns;
-
-TCPServer server = TCPServer(HTTP_PORT);
-
 Adafruit_BNO055 bno = Adafruit_BNO055(55);
 
-void setup()
+void setup(void)
 {
         Serial.begin(9600);
         Serial.println("Orientation Sensor Test");
@@ -39,55 +33,45 @@ void setup()
         delay(1000);
 
         bno.setExtCrystalUse(true);
-
-
-
-        WiFi.on();
-        WiFi.connect();
-
-        server.begin();
-
-        bool success = mdns.setHostname("photon");
-
-        if (success) {
-                success = mdns.addService("tcp", "http", HTTP_PORT, "photon");
-        }
-
-        mdns.addTXTEntry("normal");
-
-        if (success) {
-                success = mdns.begin();
-        }
 }
 
-void loop()
+void loop(void)
 {
         /* Get a new sensor event */
         sensors_event_t event;
         bno.getEvent(&event);
 
-        String x = String(event.orientation.x, 4);
-        String y = String(event.orientation.y, 4);
-        String z = String(event.orientation.z, 4);
+        /* Display the floating point data */
 
-        mdns.processQueries();
+        Serial.println("");
+        Serial.print("X: ");
+        Serial.print(event.orientation.x, 4);
+        Serial.print("\tY: ");
+        Serial.print(event.orientation.y, 4);
+        Serial.print("\tZ: ");
+        Serial.print(event.orientation.z, 4);
+        Serial.println("");
 
-        TCPClient client = server.available();
 
-        if (client) {
-                while (client.read() != -1)
-                {
-                        String json="{\"x\": \""+x+"\",\"y\": \""+y+"\",\"z\": \""+z+"\"}";
 
-                        client.write("HTTP/1.1 200 Ok\n");
-                        client.write("access-control-allow-origin: *\n");
-                        client.write("\n" + json);
-                        client.flush();
-                        delay(5);
-                        client.stop();
-                }
-           }
+        imu::Vector<3> acc = bno.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER);
+        imu::Vector<3> gravity = bno.getVector(Adafruit_BNO055::VECTOR_GRAVITY);
 
-           delay(75);
+        float ax = acc.x() - gravity.x();
+        float ay = acc.y() - gravity.y();
+        float az = acc.z() - gravity.z();
 
+        /* Display the floating point data */
+
+        Serial.print("AX: ");
+        Serial.print(ax);
+        Serial.print("\tAY: ");
+        Serial.print(ay);
+        Serial.print("\tAZ: ");
+        Serial.print(az);
+        Serial.println("");
+
+
+
+        delay(100);
 }
