@@ -1,0 +1,36 @@
+<!--
+Show the sensor values from the Photon on a webpage.
+This is done by making an HTTP GET request to "photon.local".
+Data is refreshed every 100ms.
+-->
+<html>
+
+<h1>x=<strong id="x"></strong></h1>
+
+<h1>y=<strong id="y"></strong></h1>
+
+<h1>z=<strong id="z"></strong></h1>
+
+
+<script>
+    function httpGet(theUrl) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, false); // false for synchronous request
+        xmlHttp.send(null);
+        return xmlHttp.responseText;
+    }
+
+
+    function getVals() {
+        var json = httpGet("http://photon.local");
+        obj = JSON.parse(json);
+        document.getElementById("x").innerHTML = obj.x;
+        document.getElementById("y").innerHTML = obj.y;
+        document.getElementById("z").innerHTML = obj.z;
+    }
+
+    setInterval(getVals, 250);
+</script>
+
+
+<html>

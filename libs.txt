@@ -1,0 +1,11 @@
+https://github.com/adafruit/Adafruit_BNO055.git Adafruit_BNO055
+https://github.com/adafruit/Adafruit_Sensor.git Adafruit_Sensor
+ imumaths
+ matrix
+ quaternion
+ vector
+https://github.com/Hotaman/OneWireSpark OneWire
+https://github.com/mrhornsby/spark-core-mdns MDNS
+ Label
+ Record
+ Buffer

@@ -1,0 +1,41 @@
+---
+cmd: po photon build
+
+targets:
+  Build:
+    args:
+      - photon
+      - build
+    cmd: po
+    keymap: ctrl-alt-1
+    name: Build
+  Flash:
+    args:
+      - photon
+      - flash
+    cmd: po
+    keymap: ctrl-alt-2
+    name: Flash
+  Clean:
+    args:
+      - photon
+      - clean
+    cmd: po
+    keymap: ctrl-alt-3
+    name: Clean
+  DFU:
+    args:
+      - photon
+      - dfu
+    cmd: po
+    keymap: ctrl-alt-4
+    name: DFU
+  OTA:
+    args:
+      - photon
+      - ota
+      - --multi
+    cmd: po
+    keymap: ctrl-alt-5
+    name: DFU
+
