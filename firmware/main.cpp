@@ -3,12 +3,7 @@
 #include "Label.h"
 #include "MDNS.h"
 #include "OneWire.h"
-#include "vector.h"
-#include "quaternion.h"
-#include "matrix.h"
-#include "imumaths.h"
-#include "Adafruit_Sensor.h"
-#include "Adafruit_BNO055.h"
+#include "particle-BNO055.h"
 #include "Particle.h"
 
 SYSTEM_MODE(MANUAL);
