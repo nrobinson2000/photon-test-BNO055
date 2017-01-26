@@ -1,6 +1,3 @@
 https://github.com/nrobinson2000/particle-BNO055.git particle-BNO055
 https://github.com/Hotaman/OneWireSpark OneWire
-https://github.com/mrhornsby/spark-core-mdns MDNS
- Label
- Record
- Buffer
+https://github.com/nrobinson2000/MDNS MDNS
