@@ -1,6 +1,3 @@
-#include "MDNS.h"
-#include "OneWire.h"
-#include "particle-BNO055.h"
 #include "Particle.h"
 
 SYSTEM_MODE(MANUAL);
